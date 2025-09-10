@@ -3,18 +3,21 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+void *f1(void *arg);
 
 int main()
 {
 	pthread_t f2_thread, f1_thread;
-	void *f1();
 	int i1 = 1;
 	pthread_create(&f1_thread, NULL, f1, &i1);
 	pthread_join(f1_thread, NULL);
 }
 
 /*thread for the library call version*/
-void *f1(int *x)
+void *f1(void *arg)
 {
 	long i;
 	FILE *fp;

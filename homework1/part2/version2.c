@@ -3,18 +3,20 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <unistd.h>
+
+void *f2(void *arg);
 
 int main()
 {
 	pthread_t f2_thread, f1_thread;
-	void *f2();
 	int i2;
 	i2 = 2;
 	pthread_create(&f2_thread, NULL, f2, &i2);
 	pthread_join(f2_thread, NULL);
 }
 
-void *f2(int *x)
+void *f2(void *arg)
 {
 	long i;
 	int fd;
@@ -34,4 +36,3 @@ void *f2(int *x)
 	printf("f2\n");
 	pthread_exit(NULL);
 }
-
